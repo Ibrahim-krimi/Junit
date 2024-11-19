@@ -1,0 +1,14 @@
+spring:
+  application:
+        name: postions
+  datasource:
+    password: root
+    username: root
+    url: jdbc:mysql://localhost:3306/positions?createDatabaseIfNotExist=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: always # intialiser la base avec les .sql qui existe dans le resources
+server:
+  servlet:
+    context-path: /api
