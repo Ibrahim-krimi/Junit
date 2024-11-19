@@ -9,19 +9,16 @@ import java.util.List;
 
 @Service
 public class CustomerService {
-
-    private final JdbcTemplate jdbcTemplate;
-
-    private final String FIND_ALL = "select * from customers";
-
-    private RowMapper<Customer> customerRowMapper=((rs, name)
-            ->new Customer (rs.getInt("id"),rs.getString("email") ));
-
-    public CustomerService(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
+    public CustomerService(CustomerDao customerDao) {
+        this.customerDao = customerDao;
     }
 
-    public List<Customer> findAll() {
-        return jdbcTemplate.query(FIND_ALL, customerRowMapper);
+    CustomerDao customerDao;
+
+    public List<Customer> getCustomers() {
+        return this.customerDao.findAll();
     }
+
+
+
 }

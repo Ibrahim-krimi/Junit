@@ -10,22 +10,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 @JdbcTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-class CustomerServiceTest {
+class CustomerDaoTest {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    CustomerService customerService;
+    CustomerDao customerDao;
 
     @Test
     void shouldReturnListOfCustomers() {
         //Arrange /Given
-        customerService = new CustomerService(jdbcTemplate);
+        customerDao = new CustomerDao(jdbcTemplate);
         //Act /when
-        List<Customer> customers  =this.customerService.findAll();
+        List<Customer> customers  =this.customerDao.findAll();
         //Assert / Then
         Assertions.assertEquals(7, customers.size());
         //Assertions.assertEquals(customers.get(0).getEmail(), "ibrahimkrimi2@gmail.com");
