@@ -1,22 +1,23 @@
 package tech.chillo.postions.customers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CustomerService {
-    public CustomerService(CustomerDao customerDao) {
-        this.customerDao = customerDao;
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
     }
 
-    CustomerDao customerDao;
+    CustomerRepository customerRepository;
 
-    public List<Customer> getCustomers() {
-        return this.customerDao.findAll();
+    public List<CustomerDTO> getCustomers() {
+       List<CustomerDTO> customerDTOList  = this.customerRepository.findAll().stream().map(customer -> {
+             return  new CustomerDTO(customer.getId(),customer.getEmail());
+         }).toList();
+       return customerDTOList;
     }
 
 

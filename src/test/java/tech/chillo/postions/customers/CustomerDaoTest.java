@@ -24,7 +24,7 @@ class CustomerDaoTest {
         //Arrange /Given
         customerDao = new CustomerDao(jdbcTemplate);
         //Act /when
-        List<Customer> customers  =this.customerDao.findAll();
+        List<CustomerDTO> customers  =this.customerDao.findAll();
         //Assert / Then
         Assertions.assertEquals(7, customers.size());
         //Assertions.assertEquals(customers.get(0).getEmail(), "ibrahimkrimi2@gmail.com");
