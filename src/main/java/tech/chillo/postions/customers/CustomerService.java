@@ -14,12 +14,15 @@ public class CustomerService {
     CustomerRepository customerRepository;
 
     public List<CustomerDTO> getCustomers() {
-       List<CustomerDTO> customerDTOList  = this.customerRepository.findAll().stream().map(customer -> {
-             return  new CustomerDTO(customer.getId(),customer.getEmail());
-         }).toList();
+       List<CustomerDTO> customerDTOList = this.customerRepository.findAll().stream().map(customer ->
+               new CustomerDTO(customer.getId(),customer.getEmail())).toList();
        return customerDTOList;
     }
-
-
+    public CustomerDTO getCustomer(int id) {
+        Customer customer= this.customerRepository.findById(id).orElseThrow(
+                ()->new IllegalArgumentException("No Customer With this Id")
+        );
+        return new CustomerDTO(customer.getId(),customer.getEmail());
+    }
 
 }
